@@ -6,7 +6,9 @@
 #include <QMenuBar>
 #include <QFileDialog>
 
-#include "filelistwidget.h"
+// #include "filelistwidget.h"
+#include "filetreewidget.h"
+
 
 PageDisplay::PageDisplay(QWidget *parent) :
     QWidget(parent),
@@ -21,8 +23,10 @@ PageDisplay::PageDisplay(QWidget *parent) :
     file_menu->addAction(file_action);
     connect(file_action, &QAction::triggered, this, &PageDisplay::slot_OpenFile);
 
-    _file_list = new FileListWidget(this);
-    connect(this, &PageDisplay::Sig_OpenFile, dynamic_cast<FileListWidget*>(_file_list), &FileListWidget::slot_OpenFile);
+    _file_list = new FileTreeWidget(this);
+    auto file_list = dynamic_cast<FileTreeWidget*>(_file_list);
+    file_list->header()->hide();
+    connect(this, &PageDisplay::Sig_OpenFile, file_list, &FileTreeWidget::slot_OpenFile);
     _menu->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     _menu->setFixedHeight(_menu->sizeHint().height());
     ui->file_layout->insertWidget(0, _menu, 0, Qt::AlignTop);

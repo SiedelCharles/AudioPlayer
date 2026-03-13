@@ -42,12 +42,24 @@ set(PROJECT_SOURCES
         pagesynthesis.cpp
         pagesynthesis.h
         pagesynthesis.ui
-        filelistitem.cpp
-        filelistitem.h
-        filelistthread.cpp
-        filelistthread.h
-        filelistwidget.cpp
-        filelistwidget.h
+        # filelistitem.cpp
+        # filelistitem.h
+        # filelistthread.cpp
+        # filelistthread.h
+        # filelistwidget.cpp
+        # filelistwidget.h
+        filetreeitem.cpp
+        filetreeitem.h
+        filetreewidget.cpp
+        filetreewidget.h
+        filetreethread.cpp
+        filetreethread.h
+        # filetreeitem.cpp
+        # filetreeitem.h
+        # filetreethread.cpp
+        # filetreethread.h
+        # filetreewidget.cpp
+        # filetreewidget.h
         resource.qrc
 )
 
