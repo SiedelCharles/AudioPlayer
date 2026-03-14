@@ -8,10 +8,13 @@
 class FileTreeWidget : public QTreeWidget
 {
     Q_OBJECT
+signals:
+    // void SigPlayMusic(QTreeWidgetItem *item, int cloumn);
 public:
     FileTreeWidget(QWidget *parent = nullptr);
 public slots:
     void slot_OpenFile(const QString& path);
+    // void slot_PlayMusic(QTreeWidgetItem *item, int column);
 private:
     std::shared_ptr<FileTreeThread> _thread_openfiles;
 };

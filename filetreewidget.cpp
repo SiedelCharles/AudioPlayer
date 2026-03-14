@@ -22,3 +22,13 @@ void FileTreeWidget::slot_OpenFile(const QString &path)
        _thread_openfiles->start();
     }
 }
+
+// void FileTreeWidget::slot_PlayMusic(QTreeWidgetItem *item, int column)
+// {
+//     if (!item) return;
+//     QString file_path = item->data(0, Qt::ToolTipRole).toString();
+//     if (!file_path.isEmpty()) {
+//         qDebug() << "slot_PlayMusic is executed. ";
+//         emit SigPlayMusic(item, column);
+//     }
+// }

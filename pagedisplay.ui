@@ -27,18 +27,10 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QVBoxLayout" name="file_layout" stretch=""/>
+    <layout class="QVBoxLayout" name="file_layout"/>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="audio_layout">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>a label to fill the void</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <layout class="QVBoxLayout" name="audio_layout"/>
    </item>
   </layout>
  </widget>

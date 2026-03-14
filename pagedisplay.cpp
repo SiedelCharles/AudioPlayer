@@ -7,11 +7,12 @@
 #include <QFileDialog>
 
 // #include "filelistwidget.h"
+#include "audioplaypage.h"
 #include "filetreewidget.h"
 
 
-PageDisplay::PageDisplay(QWidget *parent) :
-    QWidget(parent),
+PageDisplay::PageDisplay(QWidget *parent)
+    : QWidget(parent),
     ui(new Ui::PageDisplay)
 {
     ui->setupUi(this);
@@ -31,6 +32,10 @@ PageDisplay::PageDisplay(QWidget *parent) :
     _menu->setFixedHeight(_menu->sizeHint().height());
     ui->file_layout->insertWidget(0, _menu, 0, Qt::AlignTop);
     ui->file_layout->addWidget(_file_list);
+
+    _audio_player = new AudioPlayPage(this);
+    ui->audio_layout->addWidget(_audio_player);
+    connect(file_list, &FileTreeWidget::itemClicked, dynamic_cast<AudioPlayPage*>(_audio_player), &AudioPlayPage::slot_PlayMusic);
 }
 
 PageDisplay::~PageDisplay()
@@ -53,6 +58,6 @@ void PageDisplay::slot_OpenFile(bool checked)
         return ;
     }
     QString import_path = fileNames.at(0);
-    // emit Sig_OpenProject(import_path);
     emit  Sig_OpenFile(import_path);
 }
+

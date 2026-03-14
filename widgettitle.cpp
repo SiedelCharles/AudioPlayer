@@ -32,7 +32,7 @@ void WidgetTitle::mousePressEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton) {
         _clicked = true;
-        _offset = event->globalPos() - parentWidget()->pos(); // 这是qt5的风格
+        _offset = event->globalPos() - parentWidget()->pos();
     }
 }
 

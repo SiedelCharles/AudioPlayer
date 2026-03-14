@@ -9,10 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
-
-
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Multimedia)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Multimedia)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -42,28 +40,28 @@ set(PROJECT_SOURCES
         pagesynthesis.cpp
         pagesynthesis.h
         pagesynthesis.ui
-        # filelistitem.cpp
-        # filelistitem.h
-        # filelistthread.cpp
-        # filelistthread.h
-        # filelistwidget.cpp
-        # filelistwidget.h
         filetreeitem.cpp
         filetreeitem.h
         filetreewidget.cpp
         filetreewidget.h
         filetreethread.cpp
         filetreethread.h
-        # filetreeitem.cpp
-        # filetreeitem.h
-        # filetreethread.cpp
-        # filetreethread.h
-        # filetreewidget.cpp
-        # filetreewidget.h
+        audioplaypage.cpp
+        audioplaypage.h
+        audioplaythread.cpp
+        audioplaythread.h
         resource.qrc
 )
 
+# set(FFMPEG_DIR "D:/VisualStudio_Created/VisualStudio_Resource/Download_Exe/ffmpeg-8.0.1-full_build-shared")
+# set(FFMPEG_SOURCES
+#     ${FFMPEG_DIR}/libavcodec/jni.h
+# )
+
 set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/favicon.rc")
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg/include)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg/lib)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(AudioPlayer
@@ -111,6 +109,17 @@ install(TARGETS AudioPlayer
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+target_link_libraries(AudioPlayer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
+    Qt6::Multimedia
+    avcodec
+    avformat
+    avutil
+    swresample
+    # scale
+    # avdevice
+    # avfilter
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
