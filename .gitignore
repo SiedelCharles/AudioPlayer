@@ -1,4 +1,5 @@
 build/
 ffmpeg
 *.dll
-resource/01_目覚めたら女の子になっちゃった_女の子の着替えを初体験.wav
+resource/
+whisper/

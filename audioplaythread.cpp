@@ -126,7 +126,7 @@ void AudioPlayThread::run()
                                    _codec_context->sample_rate,
                                    0, nullptr);
     int ret = swr_init(_swr_context);
-    if (!_swr_context) {
+    if (!_swr_context || ret < 0) {
         qDebug() << "swr_context is null";
         return;
     }

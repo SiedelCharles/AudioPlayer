@@ -13,19 +13,18 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>10</y>
-     <width>191</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>this is transcription page</string>
-   </property>
-  </widget>
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,4">
+   <item>
+    <layout class="QVBoxLayout" name="file_layout"/>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="text_layout">
+     <item>
+      <widget class="QTextBrowser" name="output_text"/>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

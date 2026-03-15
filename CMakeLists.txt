@@ -50,6 +50,10 @@ set(PROJECT_SOURCES
         audioplaypage.h
         audioplaythread.cpp
         audioplaythread.h
+        transcriptionthread.cpp
+        transcriptionthread.h
+        transcriptiondecodethread.cpp
+        transcriptiondecodethread.h
         resource.qrc
 )
 
@@ -59,9 +63,10 @@ set(PROJECT_SOURCES
 # )
 
 set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/favicon.rc")
+# set(whisper "D:/VisualStudio_Created/VisualStudio_Resource/audio/whisper.cpp")
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg/include)
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg/lib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg/include ${CMAKE_CURRENT_SOURCE_DIR}/whisper/include)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg/lib ${CMAKE_CURRENT_SOURCE_DIR}/whisper)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(AudioPlayer
@@ -117,6 +122,10 @@ target_link_libraries(AudioPlayer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
     avformat
     avutil
     swresample
+    whisper
+    ggml
+    ggml-base
+    ggml-cpu
     # scale
     # avdevice
     # avfilter

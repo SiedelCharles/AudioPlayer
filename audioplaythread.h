@@ -32,14 +32,11 @@ signals:
     void SigError(const QString &msg);
 protected:
     virtual void run() override;
-private:
+// private:
     QString _file_path;
     QMutex _mutex;
     QWaitCondition _cond;
     bool _stop = false;
-
-    QIODevice *_audio_device = nullptr;
-    QAudioSink *_audio_sink = nullptr;
 
     SwrContext *_swr_context = nullptr;
     AVCodecContext *_codec_context = nullptr;
@@ -51,6 +48,9 @@ private:
     AVRational _time_base;
     bool ffmpeg_init();
     void ffmpeg_reclamation();
+private:
+    QIODevice *_audio_device = nullptr;
+    QAudioSink *_audio_sink = nullptr;
 };
 
 inline bool AudioPlayThread::IsStop() {
