@@ -3,3 +3,7 @@ ffmpeg
 *.dll
 resource/
 whisper/
+python/voice/sample1.wav
+python/voice/test_audio2.wav
+.vscode/c_cpp_properties.json
+.vscode/settings.json

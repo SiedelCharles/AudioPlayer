@@ -18,7 +18,6 @@ void AudioPlayThread::SetFile(const QString &file_path)
 {
     QMutexLocker locker(&_mutex);
     _file_path = file_path;
-    qDebug() << file_path;
     _stop = false;
 }
 
@@ -68,9 +67,6 @@ bool AudioPlayThread::ffmpeg_init()
         emit SigError("Failed to open codec" + QString::number(res));
         return false;
     }
-
-    qDebug() << "Audio stream time_base:" << _time_base.den;
-    qDebug() << "Sample rate:" << _codec_context->sample_rate;
 
     return true;
 }

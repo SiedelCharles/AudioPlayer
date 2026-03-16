@@ -76,7 +76,7 @@ void TranscriptionDecodeThread::run()
                 auto out_buf_size = av_samples_get_buffer_size(nullptr, 1,
                                                                out_samples_max,
                                                                AV_SAMPLE_FMT_S16, 1);
-                qDebug() << out_buf_size;
+                // qDebug() << out_buf_size;
                 if(out_buf_size < 0) {
                     qDebug() << "Failed to get buffer size";
                     av_frame_unref(frame);

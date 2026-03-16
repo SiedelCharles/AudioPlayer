@@ -13,7 +13,7 @@ class TranscriptionThread : public QThread
 {
     Q_OBJECT
 signals:
-    void SigTranscriptionText(const QString);
+    void SigTranscriptionText(const QString& text);
 public:
     explicit TranscriptionThread(QObject *parent = nullptr);
     ~TranscriptionThread();
@@ -41,8 +41,6 @@ private:
 
     int _intervals = 1;
     QList<QByteArray> _audio_queue;
-
-    // QVector<float> convertToFloat32(const QByteArray &pcm_data);
 };
 
 

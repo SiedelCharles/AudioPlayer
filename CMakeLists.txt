@@ -9,6 +9,11 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(pybind11_DIR "D:/VisualStudio_Created/VisualStudio_Resource/miniconda/envs/myenv/lib/site-packages/pybind11/share/cmake/pybind11")
+set(Python_DIR "D:/VisualStudio_Created/VisualStudio_Resource/miniconda/envs/myenv")
+find_package(Python REQUIRED COMPONENTS Interpreter Development)
+find_package(pybind11 REQUIRED)
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Multimedia)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Multimedia)
 
@@ -54,8 +59,14 @@ set(PROJECT_SOURCES
         transcriptionthread.h
         transcriptiondecodethread.cpp
         transcriptiondecodethread.h
+
         resource.qrc
 )
+
+set(PYTHON_SCRIPTS
+    python/translate/trans.py
+)
+add_custom_target(python_scripts SOURCES ${PYTHON_SCRIPTS})
 
 # set(FFMPEG_DIR "D:/VisualStudio_Created/VisualStudio_Resource/Download_Exe/ffmpeg-8.0.1-full_build-shared")
 # set(FFMPEG_SOURCES
@@ -126,6 +137,7 @@ target_link_libraries(AudioPlayer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
     ggml
     ggml-base
     ggml-cpu
+    pybind11::embed
     # scale
     # avdevice
     # avfilter

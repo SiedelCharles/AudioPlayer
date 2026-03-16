@@ -43,7 +43,7 @@ PageTranscription::PageTranscription(QWidget *parent) :
 
     connect(file_list, &FileTreeWidget::itemClicked, this, &PageTranscription::slot_StartThread/*dynamic_cast<AudioPlayPage*>(_audio_player), &AudioPlayPage::slot_PlayMusic*/);
     connect(_thread_transcription, &TranscriptionThread::SigTranscriptionText
-            , this, &PageTranscription::slot_SetText);
+            , this, &PageTranscription::slot_SetText, Qt::QueuedConnection);
 }
 
 PageTranscription::~PageTranscription()
@@ -67,11 +67,13 @@ void PageTranscription::slot_AddFile()
         return ;
     }
     QString import_path = fileNames.at(0);
-    emit  Sig_AddFile(import_path);
+    ui->output_text->setText(import_path);
+    emit Sig_AddFile(import_path);
 }
 
 void PageTranscription::slot_StartThread(QTreeWidgetItem *item, int column)
 {
+    qDebug() << "Start";
     _thread_transcription = new TranscriptionThread(this);
     _thread_transcription->SetModelPath("D:/VisualStudio_Created/VisualStudio_Resource/audio/whisper.cpp/models/ggml-small.bin");
     _thread_decoder = new TranscriptionDecodeThread(this);

@@ -89,6 +89,7 @@ void TranscriptionThread::run()
     params.offset_ms        = 0;
     params.duration_ms      = 0;
 
+    int bytes_per_second = _sample_rate * (_sample_size / 8) * _channel_count;
     QByteArray accumulated_audio;
     while (!_stop) {
         {
@@ -105,15 +106,12 @@ void TranscriptionThread::run()
             _audio_queue.clear();
         }
 
-        int bytes_per_second = _sample_rate * (_sample_size / 8) * _channel_count;
         if (accumulated_audio.size() < _intervals * bytes_per_second) {
-            qDebug() << accumulated_audio.size();
             continue;
         }
-
+        qDebug() << accumulated_audio.size();
         QVector<float> pcm_f32 = ConvertToFloat32(accumulated_audio);
         accumulated_audio.clear();
-        qDebug() << "Clear";
 
         int ret = whisper_full(_whisper_context, params, pcm_f32.data(), pcm_f32.size());
         if (ret != 0) {
@@ -136,6 +134,7 @@ void TranscriptionThread::run()
         if (!result_text.isEmpty()) {
             qDebug() << result_text;
             emit SigTranscriptionText(result_text);
+            qDebug() << "signal is called.";
         }
     }
 
@@ -149,6 +148,7 @@ void TranscriptionThread::run()
                 final_text += QString::fromUtf8(whisper_full_get_segment_text(_whisper_context, i));
             }
             if (!final_text.isEmpty()) {
+                qDebug() << final_text;
                 emit SigTranscriptionText(final_text);
             }
         }
